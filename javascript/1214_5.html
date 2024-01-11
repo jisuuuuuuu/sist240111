@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>자바스크립트(계산기)</title>
+    <script>
+        var expression = "";
+
+        function add(a)
+        {
+            expression += a;
+            document.getElementById('display').value = expression;
+        }
+
+        function clearDisplay()
+        {
+            expression = "";
+            document.getElementById('display').value = "0";
+        }
+
+        function compute()
+        {
+            document.getElementById("display").value = eval(expression);
+        }
+    </script>
+</head>
+<body>
+    <form name="form1" action="1214.html" method="get">
+        display <input id="display" value="0" size="30">
+        <br />
+        <input type="button" value="    7    " onClick="add('7')"/>
+        <input type="button" value="    8    " onClick="add('8')"/>
+        <input type="button" value="    9    " onClick="add('9')"/>
+        <input type="button" value="    /    " onClick="add('/')"/>
+        <br />
+        <input type="button" value="    4    " onClick="add('4')"/>
+        <input type="button" value="    5    " onClick="add('5')"/>
+        <input type="button" value="    6    " onClick="add('6')"/>
+        <input type="button" value="    *    " onClick="add('*')"/>
+        <br />
+        <input type="button" value="    1    " onClick="add('1')"/>
+        <input type="button" value="    2    " onClick="add('2')"/>
+        <input type="button" value="    3    " onClick="add('3')"/>
+        <input type="button" value="    -    " onClick="add('-')"/>
+        <br />
+        <input type="button" value="    0    " onClick="add('0')"/>
+        <input type="button" value="    +    " onClick="add('+')"/>
+        <br />
+        <input type="button" value="  Clear  " onClick="clearDisplay()"/>
+        <input type="button" value="    Enter    " name="enter" onClick="compute()"/>
+    </form>
+</body>
+</html>

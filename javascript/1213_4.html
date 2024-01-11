@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>자바스크립트(함수)</title>
+    <script>
+        function addNum(x, y)
+        {
+            document.write("함수호출<br />");
+            return x + y;
+        }
+
+        function addNum2(x, y)
+        {
+            document.write("addNum2(x, y) : " + (x + y) + "<br />");
+        }
+
+        function sqr(x)
+        {
+            return x * x;
+        }
+
+        function localNum()
+        {
+            var num = 10;
+            num2 = 20;
+
+            document.write("함수 내부에서 변수 num의 타입은 " + (typeof num) + "입니다.<br />");
+            document.write("함수 내부에서 변수 num2의 타입은 " + (typeof num2) + "입니다.<br />");
+        }
+
+        var num = 10;
+
+        function globalNum()
+        {
+            var num = 20;
+            document.write("함수내에서 지역변수 num의 값은 " + num + "입니다.<br />");
+            document.write("함수내에서 전역변수 num의 값은 " + window.num + "입니다.<br />");
+        }
+
+        // function addNum3(x, y, z)
+        // {
+        //     return x + y + z;
+        // }
+        //바로위에 함수를 매개변수 없을 경우 NaN발생하지 않게 처리
+        function addNum3(x, y, z)
+        {
+            if(x === undefined)
+            {
+                x = 0;
+            }
+            if(y === undefined)
+            {
+                y = 0;
+            }
+            if(z === undefined)
+            {
+                y = 0;
+            }
+            
+            return x + y + z;
+        }
+    </script>
+</head>
+<body>
+    <h3>자바스크립트 함수</h3>
+    <script>
+        document.write("addNum(x, y) : " + addNum(2, 3));
+        document.write("<br />");
+
+        document.write("addNum() : " + addNum());
+        document.write("<br />");
+
+        addNum2(13, "일 입니다.");
+    </script>
+    <br /><br />
+    <script>
+        //값으로서의 함수
+        var sqrNum = sqr;
+
+        document.write("sqr(4) : " + sqr(4) + "<br />");
+        document.write("sqrNum(4) : " + sqrNum(5) + "<br />");
+    </script>
+    <br /><br />
+    <script>
+        //변수 유효범위(전역변수/지역번수)}
+        localNum();
+
+        document.write("함수 호출이 끝난 뒤 변수 num의 타입은 " + (typeof num) + "입니다. <br />");
+        document.write("함수 호출이 끝난 뒤 변수 num2의 타입은 " + (typeof num2) + "입니다. <br />");
+    </script>
+    <br /><br />
+    <script>
+        //함수 내에서 전역변수 사용시 앞에 window. 을 사용
+        globalNum();
+
+        //매개변수
+        document.write("<br /><br />");
+        document.write("1 : " + addNum3(1, 2, 3) +"<br />");
+        document.write("2 : " + addNum3(1, 2) + "<br />");
+        document.write("3 : " + addNum3(1) + "<br />");
+        document.write("4 : " + addNum3() + "<br />");
+    </script>
+</body>
+</html>

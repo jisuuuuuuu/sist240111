@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>DOM요소</title>
+    <script>
+        //모든 li요소를 선택하여 텍스트 색상 변경
+        function fn_tag()
+        {
+            var selectedItem = document.getElementsByTagName("li");
+            var i;
+
+            for(i = 0; i < selectedItem.length; i++)
+            {
+                selectedItem.item(i).style.color = "orange"; //선택된 요소의 색상변경
+            }
+        }
+
+        //아이디를 이용하여 선택한 후 텍스트 변경(단, 아이디가 여러개인 경우 첫번째만 적용됨)
+        function fn_id()
+        {
+            var selectItem = document.getElementById("even");
+            selectItem.style.color = "red";
+        }
+    </script>
+</head>
+<body>
+    <h2>모든 li 요소 선택</h2>
+    <ul>
+        <li id = "even">월요일</li>
+        <li>화요일</li>
+        <li name = "first">수요일</li>
+        <li>목요일</li>
+        <li name = "first">금요일</li>
+        <li id = "even">토요일</li>
+        <li id = "even">일요일</li>
+    </ul>
+    <input type="button" value="li태그로 선택" onClick="fn_tag()"/>
+    &nbsp;
+    <input type="button" value="id가 even 선택" onClick="fn_id()"/>
+
+    <script>
+        var selectI = document.getElementsByName("first");
+
+        for(var i = 0; i < selectI.length; i++)
+        {
+            selectI.item(i).style.color = "blue";
+        }
+
+        //타이틀 요소 선택
+        var title = document.title;
+        document.write(title + "<br /><br />");
+    </script>
+
+    <h2>Dom요소의 스타일 변경</h2>
+    <p id="text">이부분의 스타일이 변경됩니다.</p>
+    <input type="button" value="빨간색 변경" onClick="redColor()"/>
+    &nbsp;
+    <input type="button" value="검정색 변경" onClick="blackColor()"/>
+    <script>
+        var str = document.getElementById('text');
+
+        function redColor()
+        {
+            str.style.color = "red";
+        }
+
+        function blackColor()
+        {
+            str.style.color = "black";
+        }
+    </script>
+</body>
+</html>

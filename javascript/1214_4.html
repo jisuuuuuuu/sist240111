@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>자바스크립트(이벤트 처리)</title>
+    <script>
+        function sub()
+        {
+            var x = document.getElementById("name");
+            x.value = x.value.toLowerCase();
+        }
+
+        function onButtonDown(a)
+        {
+            a.style.color = '#ff0000';
+        }
+        function onButtonUp(a)
+        {
+            a.style.color = "blue";
+        }
+    </script>
+</head>
+<body>
+    영어단어 : <input type="text" id="name" name="name" onchange="sub()"/>
+    <p>입력필드를 벗어나면 소문자로 변경됨.</p>
+    <br /><br />
+    <button onmousedown="onButtonDown(this)" onmouseup="onButtonUp(this)">버튼을 눌러보세요.</button>
+</body>
+</html>

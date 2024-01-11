@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery</title>
+    <script src="../js/jquery-1.12.4.min.js"></script>
+    <style>
+        div{margin:10px;}
+        .content{border:2px solid pink;}
+        .warpper{border:2px solid green;}
+        .warpper2{border:2px solid blue;}
+        .warpper3{border:2px solid brown;}
+    </style>
+    <script>
+        $(function(){
+            $("#btn1").on("click", function(){
+                $(".content").wrap("<div class='warpper'></div>");
+            });
+
+            $("#btn2").on("click", function(){
+                $(".content").wrapAll("<div class='warpper2'></div>");
+            });
+
+            $("#btn3").on("click", function(){
+                $(".content").wrapInner("<div class='warpper3'></div>");
+            });
+
+            $("#btn4").on("click", function(){
+                $("#first").clone().appendTo("#list");
+            });
+
+            $("#btn5").on("click", function(){
+                $("#first2").replaceAll(".item");
+            });
+
+            $("#btn6").on("click", function(){
+                $(".item").replaceWith($("#first2"));
+            });
+
+            $("#btn7").on("click", function(){
+                $(".content2").remove(".first, .second");
+            });
+        });
+    </script>
+</head>
+<body>
+    <h2>.wrap() .warpAll() .warpInner() 메서드</h2>
+    <div class="content">첫번째 div입니다.</div>
+    <div class="content">두번째 div입니다.</div>
+    <button id="btn1">div 추가 warp()</button>&nbsp;
+    <button id="btn2">div 추가 warpAll()</button>&nbsp;
+    <button id="btn3">div 추가 warpInner()</button>&nbsp;
+    <br /><br />
+
+    <h2>.clone() 메서드</h2>
+    <ul id="list">
+        <li id="first">첫번째 입니다.</li>
+        <li>두번째 입니다.</li>
+        <li>세번째 입니다.</li>
+    </ul>
+    <button id="btn4">clone() 복사</button>
+    <br /><br />
+
+    <h2>.replaceAll() .replaceWith() 메서드</h2>
+    <ul>
+        <li class="item" id="first2">첫번째 입니다.</li>
+        <li class="item" id="second2">두번째 입니다.</li>
+        <li class="item" id="third2">세번째 입니다.</li>
+    </ul>
+    <button id="btn5">replaceAll 적용</button>&nbsp;
+    <button id="btn6">replaceWith 적용</button>&nbsp;
+    <br /><br />
+
+    <h2>.remove() 메서드</h2>
+    <div>
+        <div class="content2 first">첫번째 입니다.</div>
+        <div class="content2 second">두번째 입니다.</div>
+        <div class="content2 third">세번째 입니다.</div>
+    </div>
+    <button id="btn7">remove 적용</button>
+</body>
+</html>

@@ -1,0 +1,8 @@
+package com.sist.web.model;
+
+import java.io.Serializable;
+
+public class User implements Serializable
+{
+
+}

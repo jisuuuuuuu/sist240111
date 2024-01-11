@@ -1,0 +1,20 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<%
+	request.setCharacterEncoding("UTF-8");
+
+	String season = request.getParameter("season");
+	String fruit = request.getParameter("fruit");
+	String id = request.getParameter("idKey");
+	
+	String sessionId = session.getId();		//JSP컨테이너에서 클라이언트 구분을 위해 고유한 값을 넘겨줌.
+%>
+</body>
+</html>

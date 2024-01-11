@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<libraryInfos>
+    <libraryInfo home="C:\project\eclipse\eclipse-2021-09\eclipse\plugins\org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_16.0.2.v20210721-1149" version="16.0.2"/>
+    <libraryInfo home="C:\dev\java-1.8.0-openjdk" version="1.8.0_332">
+        <bootpath>
+            <entry path="C:\dev\java-1.8.0-openjdk\jre\lib\resources.jar"/>
+            <entry path="C:\dev\java-1.8.0-openjdk\jre\lib\rt.jar"/>
+            <entry path="C:\dev\java-1.8.0-openjdk\jre\lib\sunrsasign.jar"/>
+            <entry path="C:\dev\java-1.8.0-openjdk\jre\lib\jsse.jar"/>
+            <entry path="C:\dev\java-1.8.0-openjdk\jre\lib\jce.jar"/>
+            <entry path="C:\dev\java-1.8.0-openjdk\jre\lib\charsets.jar"/>
+            <entry path="C:\dev\java-1.8.0-openjdk\jre\lib\jfr.jar"/>
+            <entry path="C:\dev\java-1.8.0-openjdk\jre\classes"/>
+        </bootpath>
+        <extensionDirs>
+            <entry path="C:\dev\java-1.8.0-openjdk\jre\lib\ext"/>
+            <entry path="C:\WINDOWS\Sun\Java\lib\ext"/>
+        </extensionDirs>
+        <endorsedDirs>
+            <entry path="C:\dev\java-1.8.0-openjdk\jre\lib\endorsed"/>
+        </endorsedDirs>
+    </libraryInfo>
+</libraryInfos>

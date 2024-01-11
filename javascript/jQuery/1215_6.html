@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery</title>
+    <script src="../js/jquery-1.12.4.min.js"></script>
+    <script>
+        $(function(){
+            // $("button").on("click", function(){
+            //     $("#msg").find("li").eq(1).html("두번째 아이템 선택하셨습니다.").end().eq(2).html("세번째 아이템을 선택하셨습니다.");
+            // });
+
+            $("#getter").on("click", function(){
+                var size = "너비는 " + $("#box").width() + "px이고 높이는 " + $("#box").height() + "px입니다.";
+                $("#text").html(size);
+            });
+
+            $("#setter").on("click", function(){
+                w = $("#box").width();
+                h = $("#box").height();
+
+                $("#box").width(w/2).height(h/2);
+                
+                var size = "너비는 " + $("#box").width() + "px이고 높이는 " + $("#box").height() + "px입니다.";
+                $("#text").text(size);
+            });
+
+            $("#imgchk").on("click", function(){
+                // var imgSrc = $("img").attr("src"); //getter
+                // $("img").attr("src", "../img/flower1.jpg"); //setter
+
+                var imgSrc = $("#img2").attr("src");
+                
+                if(imgSrc == "../img/flower1.jpg")
+                {
+                    imgSrc = "../img/flower2.jpg";
+                }
+                else
+                {
+                    imgSrc = "../img/flower1.jpg";
+                }
+
+                $("#img2").attr("src", imgSrc);
+            });
+        });
+    </script>
+</head>
+<body>
+    <h2>메서드 체이닝</h2>
+    <ul id="msg">
+        <li>첫번째 순서 입니다.</li>
+        <li>두번째 순서 입니다.</li>
+        <li>세번째 순서 입니다.</li>
+    </ul>
+    <button>텍스트 변경</button>
+    <br /><br />
+
+    <h2>width(), height() 메서드</h2>
+    <p>버튼을 각각 클릭해보세요.</p>
+    <button id="getter">크기 읽어오기</button>
+    <button id="setter">크기 설정하기</button>
+    <br /><br />
+    <div id="box" style="width:400px;height:200px;background-color:yellow;"></div>
+    <p id="text"></p>
+
+    <br /><br />
+    <h2>.attr() 메서드</h2>
+    <button id="imgchk">src속성변경</button><br />
+    <img id="img1" src="../img/flower1.jpg" style="width:320px;height:210px;border:1px solid blue;">
+    <br />
+    <img id="img2" src="../img/flower2.jpg" style="width:320px;height:210px;border:1px solid blue;">
+    <br /><br /
+</body>
+</html>

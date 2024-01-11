@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery</title>
+    <script src="../js/jquery-1.12.4.min.js"></script>
+    <style>
+        .con * {
+            display:block;
+            border:1px solid gray;
+            padding:5px;
+            margin:15px;
+        }
+    </style>
+    <script>
+        $(function(){
+            $("#btn1").on("click", function(){
+                $("p").parent().css({"border":"2px solid red"});
+            });
+
+            $("#btn2").on("click", function(){
+                $("p").parents("div").css({"border":"2px solid brown"});
+            });
+        });
+    </script>
+</head>
+<body>
+    <h2>.parent() 메서드</h2>
+    <div class="con">
+        <div>div요소
+            <ul>ul태그
+                <li>li첫번쨰</li>
+                <li>li두번째
+                    <p>p태그<span>span태그</span></p>
+                </li>
+                <li>li세번째</li>
+            </ul>
+        </div>
+    </div>
+    <button id="btn1">부모요소</button>
+    <button id="btn2">부모 전체 요소</button>
+</body>
+</html>

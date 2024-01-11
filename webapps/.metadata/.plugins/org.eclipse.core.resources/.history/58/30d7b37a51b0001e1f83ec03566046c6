@@ -1,0 +1,24 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="org.apache.logging.log4j.LogManager" %>
+<%@ page import="org.apache.logging.log4j.Logger" %>
+<%@ page import="com.sist.web.util.HttpUtil" %>
+<%
+	Logger logger = LogManager.getLogger("loginPro.jsp");
+
+	HttpUtil.requestLogString(request, logger);
+	
+	String userId = HttpUtil.get(request, "userId");
+	String userPwd = HttpUtil.get(request, "userPwd");
+	
+	logger.debug("user Id : " + userId);
+	logger.debug("user Pwd : " + userPwd);
+%>
+<!DOCTYPE html>
+<html>
+<head>
+<%@include file="/include/head.jsp" %>
+</head>
+<body>
+
+</body>
+</html>

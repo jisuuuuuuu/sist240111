@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>자바스크립트</title>
+</head>
+<body>
+    <script>
+        //배열에 1부터 100까지 저장한 후 모두 더하기
+        var arrdata = [];
+        var gubun = "";
+
+        function insertArr(chk)
+        {
+            gubun = chk;
+
+            var i;
+            for(i = 0; i < 100; i++)
+            {
+                arrdata[i] = i + 1;
+            }
+
+            if(gubun == "I")
+            {
+                selectArr();
+            }
+            else if(gubun == 'D')
+            {
+                delArr();
+            }
+        }
+
+        function selectArr()
+        {
+            var i;
+
+            for(i = 0; i < arrdata.length; i++)
+            {
+                document.write(arrdata[i] + " ");
+            }
+
+            addArr();
+        }
+
+        function addArr()
+        {
+            var i, sum = 0;
+
+            for(i = 0; i < arrdata.length; i++)
+            {
+                sum += arrdata[i];
+            }
+
+            if(gubun == "I")
+            {
+                document.write("<p>배열 데이터 덧셈 연산결과 : " + sum + "</p>");
+            }
+            else if(gubun == "D")
+            {
+                document.write("<p>홀수번째 데이터 초기화 완료 : " + sum + "</p>");
+            }
+
+            document.write("<a href='1214_8.html'>돌아가기</a>");
+
+        }
+
+        function delArr(chk)
+        {
+            //홀수번째 0으로 초기화
+            var i;
+            for(i = 0; i < arrdata.length; i++)
+            {
+                if(i % 2 == 0)                    //if(arrdata[i] % 2 != 0)
+                {
+                    arrdata[i] = 0;
+                }
+            }
+
+            selectArr();
+        }
+    </script>
+    <!--1)생성, 조회, 연산을 우선 적용하고 2)홀수번째 0으로 초기화 적용-->
+    <input type="button" value="배열 생성.조회.연산" onclick="insertArr('I')" />
+    <br />
+    <input type="button" value="배열의 홀수번째 0으로 초기화" onclick="insertArr('D')" />
+
+</body>
+</html>

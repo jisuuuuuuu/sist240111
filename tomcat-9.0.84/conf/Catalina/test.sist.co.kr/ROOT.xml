@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Context crossContext="true" docBase="C:\project\webapps\localhost\src\main\webapp" path="" reloadable="true">
+<Resource name="jdbc/icia" 
+             auth="Container" 
+             driverClassName="oracle.jdbc.OracleDriver" 
+             type="javax.sql.DataSource" 
+             url="jdbc:oracle:thin:@localhost:1521:xe" 
+             username="c##sistuser"
+             password="1234" 
+             loginTimeout="10" 
+             maxActive="10" 
+             maxIdle="10"
+             maxWait="5000" 
+             testOnBorrow="true" />
+</Context>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery</title>
+    <script src="../js/jquery-1.12.4.min.js"></script>
+    <style>
+        .con * {
+            display:block;
+            border:1px solid gray;
+            padding:5px;
+            margin:15px;
+        }
+
+        .boldFont {
+            color:blue;
+            font-weight:bold;
+        }
+    </style>
+    <script>
+        $(function(){
+            $("#btn1").on("click", function(){
+                $("li").add("p").css({"border":"2px solid red"});
+            });
+
+            $("#btn2").on("click", function(){
+                $("li").each(function(){
+                    $(this).toggleClass("boldFont");        //클래스 생성
+                });
+            });
+
+            $("#btn3").on("click", function(){
+                $("li").first().css({"border":"2px solid brown"});
+            })
+
+            $("#btn4").on("click", function(){
+                $("li").last().css({"border":"2px solid orange"});
+            })
+
+            $("#btn5").on("click", function(){
+                $("li").eq(1).css({"border":"2px solid red"});
+            });
+
+            $("#btn6").on("click", function(){
+                $("li").eq(-1).css({"border":"2px solid yellow"});
+            });
+
+            $("#btn7").on("click", function(){
+                $("li").filter(":odd").css({"border":"2px solid blue"});
+            });
+            
+            $("#btn8").on("click", function(){
+                $("li").filter(":even").css({"border":"2px solid pink"});
+            });
+        });
+    </script>
+</head>
+<body>
+    <h2>.add() .each() 메서드</h2>
+    <ul>ul태그
+        <li>li첫번째</li>
+        <li>li두번째</li>
+        <li>li세번째</li>
+        <li>li네번째</li>
+        <li>li다섯번째</li>
+    </ul>
+    <p>추가 단락입니다.</p>
+    <button id="btn1">li에 p 추가</button>&nbsp;
+    <button id="btn2">클래스 추가/제거</button>
+    <button id="btn3">.first() 적용</button>
+    <button id="btn4">.last() 적용</button>
+    <button id="btn5">.eq(1) 적용</button>
+    <button id="btn6">.eq(-1) 적용</button>
+    <br />
+    <button id="btn7">.filter(:odd) 적용</button>
+    <button id="btn8">.filter(:even) 적용</button>
+</body>
+</html>

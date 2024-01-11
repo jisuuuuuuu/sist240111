@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery</title>
+    <script src="../js/jquery-1.12.4.min.js"></script>
+    <style>
+        .con * {
+            display:block;
+            border:1px solid gray;
+            padding:5px;
+            margin:15px;
+        }
+    </style>
+    <script>
+        $(function(){
+            $("#btn1").on("click", function(){
+                $("h4").siblings().css({"border":"2px solid blue"});
+            });
+
+            $("#btn2").on("click", function(){
+                $("h4").next().css({"border":"2px solid red"});
+            });
+
+            $("#btn3").on("click", function(){
+                $("ul").children().css({"border":"2px solid pink"});
+            });
+        });
+    </script>
+</head>
+<body>
+    <h2>.silblings() 매서드</h2>
+    <div class="con">
+        <div>div 위치</div>
+        <h2>h2 요소</h2>
+        <h3>h3 요소</h3>
+        <h4>h4 요소</h4>
+        <h5>h5 요소</h5>
+        <h6>h2 요소</h6>
+        <p>p 입니다.</p>
+    </div>
+    <button id="btn1">h4 형제요소</button>&nbsp;
+    <button id="btn2">h4 next요소</button>&nbsp;
+    <br /><br />
+
+    <h2>.children() 메서드</h2>
+    <div class="con">
+        <div>div요소
+            <ul>ul태그
+                <li>li첫번째</li>
+                <li>li두번째
+                    <p>p태그
+                        <span>span태그</span>
+                    </p>
+                </li>
+                <li>li세번째
+                    <p>li세번째p</p>
+                </li>
+            </ul></ul>
+        </div></div>
+    </div>
+    <button id="btn3">ul의 자식요소</button>
+</body>
+</html>

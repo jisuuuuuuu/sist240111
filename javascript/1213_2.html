@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <h1>label문</h1>
+    <script>
+        /*
+        var i, j;
+        
+        gugudan;
+        for(i = 1; i <= 9; i++)
+        {
+            document.write(i + "단<br />");
+            dan;
+            for(j = 1; j <= 9; j++)
+            {
+                if(i == 9)
+                {
+                    break gugudan;
+                }
+
+                if((i*j) % 2 == 0)
+                {
+                    continue dan;
+                }
+                document.write(i + " * " + j + " = " + (i*j) + "<br />");
+            }
+            document.write("ttttttttttttttt");
+        }
+        document.write("for문 끝 <br />");
+        
+       document.write("<br />");
+
+       for(i = 1; i <= 9; i++)
+       {
+        document.write(i + "단<br />");
+
+        for(j = 1; j <= 9; j++)
+        {
+            if(i == 9)
+                break;
+
+            if((i*j) % 2 == 0)
+                continue;
+            
+                document.write(i + " * " + j + " = " + (i*j) + "<br />");
+        }
+        document.write("ttttttttttttttt<br />");
+       }
+       document.write("for문 끝  : i " + i + "j : " + j + "<br />");
+       */
+    </script>
+    <br />
+    <script>
+        /*
+        while문 
+        1부터 100까지 합을 구하기.(단, 무한 루프 아니게 적용)
+        1.무한루프 없이 조건식
+        2.루프 적용
+        3.do while조건식 적용
+        */
+       var i = 0, sum = 0;
+       while(i < 101)
+       {
+        i++;
+        sum += i;
+       }
+       document.write("무한루프 없이 조건식 : " +sum + "<br />");
+
+       i = 1, sum = 0;
+       while(true)
+       {
+        sum += i;
+        i++;
+        if(i > 100)
+        {
+            break;
+        }
+       }
+       document.write("루프 적용 : " +sum + "<br />");
+
+       i = 1, sum = 0;
+
+       do
+       {
+        sum += i;
+        i++;
+       }while(i <= 100)
+       document.write("do while조건식 적용 : " +sum + "<br />");
+    </script>
+</body>
+</html>

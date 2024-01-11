@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery</title>
+    <script src="../js/jquery-1.12.4.min.js"></script>
+    <script>
+        $(function(){
+            $("#firstBtn").on("click", function(){
+                $("#first").appendTo("#list");
+            });
+
+            $("#secondBtn").on("click", function(){
+                $("#second").appendTo("#list");
+            });
+
+            $("#thirdBtn").on("click", function(){
+                $("#third").appendTo("#list");
+            });
+
+            $("#btn1").on("click", function(){
+                $("<b>새로 추가 됩니다.</b>").prependTo(".item");
+            });
+
+            $("#btn2").on("click", function(){
+                $("#firstRow").before("<tr><td>행 추가됩니다.</td><td></td></tr>");
+            });
+
+            $("#btn3").on("click", function(){
+                $("#firstRow").after("<tr><td colspan='2'>행 추가 됩니다.</td></tr>");
+            });
+
+            $("#btn4").on("click", function(){
+                $("<td>새로운 앞 열 추가</td>").insertBefore("#secondColumn");
+            });
+
+            $("#btn5").on("click", function(){
+                $("<td>새로운 뒤 열 추가</td>").insertAfter("#secondColumn2");
+            });
+        });
+    </script>
+</head>
+<body>
+    <h2>.appendTo()메서드</h2>
+    <ul id="list">
+        <li id="first">첫번째 순서입니다.</li>
+        <li id="second">두번째 순서입니다.</li>
+        <li id="third">세번째 순서입니다.</li>
+    </ul>
+    <button id="firstBtn">첫번째 추가</button>
+    <button id="secondBtn">두번째 추가</button>
+    <button id="thirdBtn">세번째 추가</button>
+    <br /><br />
+
+    <h2>.prependTo()메서드</h2>
+    <ul>
+        <li class="item">첫번째 prependTo입니다.</li>
+        <li class="item">두번째 prependTo입니다.</li>
+        <li>세번째 prependTo입니다.</li>
+    </ul>
+    <button id="btn1">prependTO 추가</button>
+    <br /><br />
+
+    <h2>.before() 메서드</h2>
+    <table>
+        <tr id="firstRow">
+            <td>첫번째 셀 입니다.</td>
+            <td>두번째 셀 입니다.</td>
+        </tr>
+    </table>
+    <button id="btn2">위에 행 추가</button>
+    <button id="btn3">아래에 행 추가</button>
+    <br /><br />
+
+    <h2>.insertBefore() 메서드</h2>
+    <table>
+        <tr>
+            <td>첫번재 열입니다.</td>
+            <td id="secondColumn">두번째 열입니다.</td>
+        </tr>
+    </table>
+    <button id="btn4">앞에 열 추가</button>
+
+    <br /><br />
+
+    <h2>.insertAftter() 메서드</h2>
+    <table>
+        <tr>
+            <td>첫번재 열입니다.</td>
+            <td id="secondColumn2">두번째 열입니다.</td>
+        </tr>
+    </table>
+    <button id="btn5">뒤에 열 추가</button>
+</body>
+</html>

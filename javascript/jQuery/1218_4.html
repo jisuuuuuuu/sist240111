@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery</title>
+    <script src="../js/jquery-1.12.4.min.js"></script>
+    <script>
+        $(function(){
+            var data;
+        
+            $("#btn1").on("click", function(){
+                data = $(".content").detach();      //삭제
+            });
+
+            $("#btn2").on("click", function(){
+                $("#container").append(data);       //복구
+            });
+
+            $("#btn3").on("click", function(){
+                $("#con").empty();
+            });
+
+            $("#btn4").on("click", function(){
+                $("span").unwrap();
+            });
+        });
+    </script>
+</head>
+<body>
+    <h2>.detach() 메서드</h2>
+    <div id="container">
+        <div>첫번째 입니다.</div>
+        <div class="content">두번째 입니다.</div>
+        <div class="content">세번째 입니다.</div>
+    </div>
+    <button id="btn1">삭제</button>
+    <button id="btn2">복구</button>
+    <br /><br />
+
+    <h2>.empty() 메서드</h2>
+    <div id="con" style="border:3px solid blue; padding:5px;">
+        <div>첫번째 입니다.</div>
+        <div>두번째 입니다.</div>
+        <div>세번째 입니다.</div>
+    </div>
+    <button id="btn3">자식 삭제</button>
+
+    <br /><br />
+
+    <h2>.unwrap() 메서드</h2>
+    <div id="con2" style="border:3px solid blue; padding:5px;">
+        <div><span>첫번째</span>입니다.</div>
+        <div><span>두번째</span>입니다.</div>
+        <div><span>세번째</span>입니다.</div>
+    </div>
+    <button id="btn4">부모 삭제</button>
+</body>
+</html>

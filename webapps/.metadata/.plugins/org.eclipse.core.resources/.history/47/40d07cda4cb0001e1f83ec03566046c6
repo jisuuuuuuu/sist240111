@@ -1,0 +1,55 @@
+package com.sist.web.dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import com.sist.web.db.DBManager;
+import com.sist.web.model.User;
+
+public class UserDao 
+{
+	private static Logger logger = LogManager.getLogger(UserDao.class);
+	
+	//사용자 조회
+	public User userSelect(String userId)
+	{
+		User user = null;
+		
+		return user;
+	}
+	
+	//아이디 존재 확인
+	public int userIdSelectCount(String userId)
+	{
+		int count = 0;
+		
+		return count;
+	}
+	
+	//사용자 등록
+	public int userInsert(User user)
+	{
+		int count = 0;
+		
+		return count;
+	}
+	
+	//사용자 정보 수정
+	public int userUpdate(User user)
+	{
+		int count = 0;
+		
+		return count;
+	}
+}
+
+
+
+
+
+
+

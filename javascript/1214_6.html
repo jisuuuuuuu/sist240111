@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>자바스크립트</title>
+    <script>
+        function textstyle()
+        {
+            document.getElementById("msg").style.color = "blue";
+            document.getElementById("msg").style.fontSize = "30px";
+            document.getElementById("msg").style.fontStyle = "italic";
+        }
+
+        function texthidden()
+        {
+            document.getElementById("msg").style.visibility = "hidden";
+        }
+
+        function textvisible()
+        {
+            document.getElementById("msg").style.visibility = "visible";
+        }
+    </script>
+</head>
+<body>
+   <p id="msg">문서 객체 스타일 변경하기</p> 
+   <input type="button" onClick="textstyle()" value="테스트 스타일 변경"/>
+   <input type="button" onClick="texthidden()" value="텍스트 숨기기"/>
+   <input type="button" onClick="textvisible()" value="텍스트 보이기"/>
+   <br /><br />
+   <h2>브라우저 창 크기 조절</h2>
+   <p>웹 브라우저 창 크기를 조절한뒤 페이지 다시 리로드후 결과 확인</p>
+   <script>
+    var windowWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+    var windowHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+
+    document.write("웹브라우저의 너비는 " + windowWidth + "픽셀이고, 높이는 " + windowHeight + "픽셀입니다.");
+   </script>
+   <br /><br />
+   <h2>브라우저 새창 열기</h2> 
+   <button onClick="openWindow()">새로운 창열기</button>
+   <button onClick="closeWindow()">새로 연 창닫기</button>
+   <script>
+    var newWindowObj;
+    var strWindowFe = "menubar=yes, location=yes, resizable=yes, scrollbars=yes, status=yes";
+
+    function openWindow()
+    {
+        newWindowObj = window.open("1214.html", "HTML 개요", strWindowFe);
+    }
+
+    function closeWindow()
+    {
+        newWindowObj.close();
+    }
+   </script>
+
+   <br /><br />
+   <h2>Location 객체</h2>
+   현재 문서 URL 주소 :
+   <script>
+        document.write("현재 문서의 주소는 " + location.href + "입니다.");
+   </script>
+
+   <br />
+   버튼 선택시 페이지 이동
+   <input type="button" value="페이지이동" onClick="fn_check()" />
+   <script>
+    function fn_check()
+    {
+        location.href = "http://www.daum.net";
+    }
+   </script>
+
+   <br />
+   <h2>history 객체</h2>
+   <p>아래 버튼 선택시 새로운 문서를 연 후에 브라우저의 뒤로가기 버튼을 눌러주세요.</p>
+   <button onclick="openDocument()">새로운 문서 열기</button>
+   <p id="text"></p>
+
+   <script>
+    function openDocument()
+    {
+        location.assign("1214.html");
+    }
+
+    document.getElementById("text").innerHTML = "현재 브라우저의 히스토리 목록 갯수는 " + history.length + "개 입니다.";
+   </script>
+
+   <br />
+   <h2>이번 페이지 이동</h2>
+   <button onclick="goBack()">이전 페이지로 가기</button>
+   <button onclick="goForward()">다음 페이지로 가기</button>
+   <script>
+    function goBack()
+    {
+        window.history.back();          //window.history.go(-1);
+    }
+
+    function goForward()
+    {
+        window.history.forward();
+    }
+   </script>
+
+   <br /><br />
+   <h2>사용자의 화면 크기</h2>
+   <script>
+        document.write("현재 모니터 화면의 너비는 " + screen.width + "픽셀입니다.<br />");
+        document.write("현재 모니터 화면의 높이는 " + screen.height + "픽셀입니다.<br />");
+        document.write("현재 브라우저 화면의 너비는 " + window.outerWidth + "픽셀입니다.<br />");
+        document.write("현재 브라우저 화면의 높이는 " + window.outerHeight + "픽셀입니다.<br />");
+
+        document.write("실제 사용할 수 있는 화면의 너비는 " + screen.availWidth + "픽셀입니다.<br />");
+        document.write("실제 사용할 수 있는 화면의 높이는 " + screen.availHeight + "픽셀입니다.<br />");
+   </script>
+</body>
+</html>

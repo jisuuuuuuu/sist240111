@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery회원가입</title>
+    <script src="../js/jquery-1.12.4.min.js"></script>
+    <script>
+        // function checkz()
+        // {
+        //     alert("회원가입");
+        // }
+        var getCheck = RegExp(/^[a-zA-Z0-9]{4,12}$/);
+        var getMail = RegExp(/^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/);
+        var getName = RegExp(/^[가-힣]+$/);
+        var getFnt = RegExp(/^\d{6}[1234]\d{6}$/);
+
+        $(function(){
+            $("#btn1").on("click", function(){
+                //아이디 입력 확인
+                if($.trim($("#tbID").val()) == "")
+                {
+                    alert("아이디를 입력하세요.");
+                    $("#tbID").val("");
+                    $("#tbID").focus();
+                    return;
+                }
+
+                if($.trim($("#tbID").val()).length < 4)
+                {//$("#tdID").val().trim().length()
+                    alert("아이디는 4자 이상이여야 합니다.");
+                    $("#tbID").focus();
+                    return;
+                }
+
+                if(!getCheck.test($("#tbID").val()))
+                {
+                    alert("아이디는 영문 대.소문자 숫자로 4~12자 이여야 합니다.");
+                    $("#tbID").val("");
+                    $("#tbID").focus();
+                    return;
+                }
+
+                if($.trim($("#tbPwd").val()) == "")
+                {
+                    alert("비밀번호를 입력하세요.");
+                    $("#tbPwd").val("");
+                    $("#tbPwd").focus();
+                    return;
+                }
+
+                //아이디와 비밀번호가 동일한지 체크
+                if($("#tbID").val() == $("#tbPwd").val())
+                {
+                    alert("아이디와 비밀번호가 동일하게 사용할 수 없습니다.");
+                    $("#tbPwd").val("");
+                    $("#tbPwd").focus();
+                    return;
+                }
+
+                if(!getCheck.test($("#tbPwd").val()))
+                {
+                    alert("비밀번호는 영문 대.소문자 숫자로 입력가능하며, 4~12자 입력하셔야 합니다.");
+                    $("#tbPwd").val("");
+                    $("#tbPwd").focus();
+                    return;
+                }
+
+                if($.trim($("#cpass").val()) == "")
+                {
+                    alert("비밀번호 확인을 입력하세요.");
+                    $("#cpass").val("");
+                    $("#cpass").focus();
+                    return;
+                }
+
+                //비밀번호와 비밀번호 확인이 같은지 확인
+                if($("#cpass").val() != $("#tbPwd").val())
+                {
+                    alert("비밀번호가 일치하지 않습니다.");
+                    $("#tbPwd").val("");
+                    $("#cpass").val("");
+                    $("#tbPwd").focus();
+                    return;
+                }
+
+                if($.trim($("#mail").val()) == "")
+                {
+                    alert("이메일을 입력하세요.");
+                    $("#mail").focus();
+                    return;
+                }
+
+                //이메일 유효성 체크
+                if(!getMail.test($("#mail").val()))
+                {
+                    alert("이메일 형식에 맞추어 입력하세요.");
+                    $("#mail").val("");
+                    $("#mail").focus();
+                    return;
+                }
+
+                //이름 유효성 체크
+                if(!getName.test($("#name").val()))
+                {
+                    alert("이름은 한글로만 입력이 가능합니다.");
+                    $("#name").val("");
+                    $("#name").focus();
+                    return;
+                }
+
+                //주민번호 체크
+                if($.trim($("#pnum").val()) == "" || $("#pnum").val().length < 6)
+                {
+                    alert("주민번호 앞자리를 입력하세요.");
+                    $("#pnum").focus();
+                    return;
+                }
+
+                if($.trim($("#nnum").val()) == "" || $("#nnum").val().length < 7)
+                {
+                    alert("주민번호 뒷자리를 입력하세요.");
+                    $("#nnum").focus();
+                    return;
+                }
+
+                //주민번호 유효성 체크
+                var jumin = $("#pnum").val() + $("#nnum").val();            //문자열 + 문자열
+                
+                if(!getFnt.test(jumin))
+                {
+                    alert("주민번호 형식에 맞게 입력하세요.");
+                    $("#pnum").focus();
+                    return;
+                }
+
+                //생일 년 월 일 설정
+                var birthYear = (jumin.charAt(6) <= 2)?"19":"20";
+                birthYear += $("#pnum").val().substr(0,2);          //0번째 인덱스부터 2글자를 가져옴.
+                var birthMonth = $("#pnum").val().substr(2,2);
+                var birthDate = $("#pnum").val().substr(4,2);
+
+                $("#year").val(birthYear);
+                $("#month").val(birthMonth);
+                $("#day").val(birthDate);
+
+                //관심분야는 하나이상 필수 체크
+                var hobbyCheck = false;
+                for(var i = 0; i < $('[name="hobby"]').length; i++)
+                {
+                    if($('input:checkbox[name="hobby"]').eq(i).is(":checked") == true)
+                    {
+                        hobbyCheck = true;
+                        break;
+                    }
+                }
+
+                if(!hobbyCheck)
+                {
+                    alert("하나이상 관심분야를 체크해주세요.");
+                    return;
+                }
+
+                if($.trim($("#intro").val()) == "")
+                {
+                    alert("자기소개를 입력하세요.");
+                    $("#intro").val("");
+                    $("#intro").focus();
+                    return;
+                }
+
+                if(confirm("회원가입을 하시겠습니까?"))
+                {
+                    document.form1.submit();
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <form name="form1" method="get" action="1219.html"> 
+        <h2 align="center">회원가입</h2>
+        <table align="center" border="3" cellspacing="0"  >
+               <tr>
+                  <td colspan="5" height="30" align="center" bgcolor=#000000" span style="color:white;">회원기본정보</td>
+        </tr>
+                <tr> 
+                  <td width="100">아이디:</td>
+                  <td colspan="4"><input type="text" name="id" maxlength="12" id="tbID" > 4~12자리의 영문 대소문자와 숫자로만 입력</td>
+               </tr>
+        <tr>
+                  <td >비밀번호:</td>
+                   <td colspan="4"><input type="password" maxlength="12" id="tbPwd" > 4~12자리의 영문 대소문자와 숫자로만 입력</td>
+               </tr>
+               <tr>
+                  <td >비밀번호확인:</td>
+                   <td colspan="4"><input type="password" id="cpass" maxlength="12"></td>
+        </tr>
+        <tr>
+                  <td>메일주소:</td>
+                  <td colspan="4"><input type="text" name="addr" id="mail">
+                  예)id@domain.com</td>
+               </tr>
+               <tr>
+                  <td>이름:</td>
+                  <td colspan="4"><input type="text" name="nam" id="name"></td>
+                </tr>
+               <tr>
+                  <td colspan="5" height="30" align="center" bgcolor=#000000" span style="color:white;">개인신상정보</td>
+                </tr>
+        <tr>
+                  <td>주민등록번호:</td>
+                  <td colspan="4"><input type="text" name="jum" id="pnum">-<input type="password" name="jumin" id="nnum">예)123456789</td>
+               </tr>
+        <tr>
+                  <td >생일:</td>
+                  <td colspan="4">
+                    <input type="text" autocomplete="OFF" name="nyear" id="year" style="width: 70px" readonly  disabled> 년
+                  <input type="text" autocomplete="OFF" name="nmonth" id="month" style="width: 50px" readonly  disabled> 월
+                    <input type="text" autocomplete="OFF" name="nday" id="day" style="width: 50px" readonly  disabled> 일
+                  </td>
+            </tr>
+        <tr>
+              <td>관심분야:</td>
+              <td colspan="4"><input type="checkbox" name="hobby" value="컴퓨터" >컴퓨터
+                  <input type="checkbox" name="hobby" value="인터넷" >인터넷
+                 <input type="checkbox" name="hobby" value="여행">여행
+                 <input type="checkbox" name="hobby" value="영화감상">영화감상
+                 <input type="checkbox" name="hobby" value="음악감상">음악감상
+              </td>
+            </tr>
+        <tr>
+                  <td width="20" height="100">자기소개:</td>
+                  <td colspan="4"><textarea name="my_intro" id="intro" cols="50" rows="5"></textarea></td>
+               </tr>
+            
+         
+        </table>
+         
+        <p align="center">
+                <!-- <input type="button" onClick="checkz()" value="회원가입"> -->
+                <input type="button" id="btn1" value="회원가입">
+                 <input type="reset" value="다시입력">
+          </p>
+         
+           </form>
+</body>
+</html>

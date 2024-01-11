@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery</title>
+    <script>
+        function func()
+        {
+            addAttribute();
+            createElement();
+        }
+
+        function addAttribute()
+        {
+            document.getElementById("para").setAttribute("style", "color:red");
+        }
+
+        function createElement()
+        {
+            var createNode = document.getElementById("para");
+            var newNode = document.createElement("p");
+            newNode.innerHTML = "새로운 태그 추가입니다.";
+            newNode.setAttribute("id", "para");
+            document.body.insertBefore(newNode, createNode);
+        }
+    </script>
+</head>
+<body>
+    <h1>아직 생성되지 않은 HTML태그 속성 추가</h1>
+    <button onClick="func()">속성추가</button>
+    <p id="para"></p>
+</body>
+</html>

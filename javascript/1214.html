@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>자바스크립트</title>
+</head>
+<body>
+    <h2>속성만 가진 객체 만들기</h2>
+    <p id="var1"></p>
+    <p id="var2"></p>
+    <p id="var3"></p>
+
+    <script>
+        var car = {name:'sonata', speed:100, color:'white'};
+
+        document.getElementById("var1").innerHTML = "자동차 이름 : " + car['name'];
+        document.getElementById("var2").innerHTML = "자동차 속도 : " + car.speed;
+        document.getElementById("var3").innerHTML = "자동차 색상 : " + car.color;
+    </script>
+
+    <h2>메서드 호출하여 연산결과 출력하기</h2>
+    <p id="msg1"></p>
+    <p id="msg2"></p>
+    <p id="msg3"></p>
+    <script>
+        var obj = {
+            m1 : function() {
+                return "hello sonata";
+            },
+            m2 : function(a) {
+                var result = a;
+                return result;
+            },
+            m3 : function(a, b) {
+                var result = a + b;
+                return result;
+            }
+        };
+
+        document.getElementById("msg1").innerHTML = obj.m1();
+        document.getElementById("msg2").innerHTML = obj.m2(100);
+        document.getElementById("msg3").innerHTML = obj.m3(100, 200);
+    </script>
+
+    <br />
+    <h3>객체 생성하기</h3>
+    <p id="carname"></p>
+    <p id="carcolor"></p>
+    <p id="carspeed"></p>
+
+    <script>
+        var car1 = {
+            name : 'sonata',
+            speed : 50,
+            color : 'white',
+            start : function(){
+                return this.speed + 10;
+            }
+        };
+
+        var cname = document.getElementById("carname");
+        cname.textContent = car1.name;
+        var colname =document.getElementById("carcolor");
+        colname.textContent = car1.color;
+        var cspeed = document.getElementById("carspeed");
+        cspeed.textContent = car1.start();
+    </script>
+
+    <br />
+    <h2>Array 생성자로 배열객체 구조 선언하기</h2>
+    <p id="car"></p>
+    <p>[Car1 속성]</p>
+    <p id="car0"></p>
+    <p>[Car2 속성]</p>
+    <p id="car1"></p>
+    <p>[Car3 속성]</p>
+    <p id="car2"></p>
+    <script>
+        var car2 = new Array(
+                        ['sonata', 'blue', 100],
+                        ['jeep','red', 70],
+                        ['passt', 'white', 150]
+        );
+
+        var cname1 = document.getElementById("car");
+        cname1.textContent = "car[2][1] : " + car2[2][1];
+
+        for(var i = 0; i < 3; i++)
+        {
+            var cname2 = document.getElementById("car" + i);
+            cname2.textContent = car2[i]
+        }
+    </script>
+</body>
+</html>

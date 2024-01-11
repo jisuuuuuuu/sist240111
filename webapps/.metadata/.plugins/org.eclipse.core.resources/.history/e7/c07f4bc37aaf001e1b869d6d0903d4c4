@@ -1,0 +1,43 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<!-- request내부 객체로 클라이언트 정보 메서드
+	 getMethod() : 요청에 사용된 방식
+	 getRequsetURI() : 요청에 대한 URL로 부터 URI를 반환함.
+	 getQueryString() : 요청에 사용된 query문장 반환.
+	 getRemoteHost() : 클라이언트 호스트 이름
+	 getRemoteAddr() : 클라이언트 주소.
+	 getProtocol() : 사용중인 프로토콜.
+	 getServerName() : 서버 도메인 이름.
+	 getServerPort() : 서버의 주소를 반환.(리턴이 int)
+	 getHeader() : http요청 헤더에 저장된 name값
+ -->
+ <%
+ 	String protocol = request.getProtocol();
+ 	String serverName = request.getServerName();
+ 	int serverPort = request.hashCode();
+ 	String remoteAddr = request.getRemoteAddr();
+ 	String remoteHost = request.getRemoteHost();
+ 	String method = request.getMethod();
+ 	StringBuffer requestURL = request.getRequestURL();
+ 	String requestURI = request.getRequestURI();
+ 	String userBrowser = request.getHeader("User-Agent");
+ %>
+ <h1>request 내부 객체</h1>
+ 프로토콜 : <%=protocol %>
+ 서버 이름 : <%=serverName %>
+ 서버 포트 : <%=serverPort %>
+ 사용자 컴퓨터 주소 : <%=remoteAddr %>
+ 사용자 컴퓨터 이름 : <%=remoteHost %>
+ 사용 method : <%=method %>
+ 요청 경로(URL) : <%=requestURL %>
+ 요청 경로(URI) : <%=requestURI %>
+ 현재 사용 브라우저 : <%=userBrowser %>
+</body>
+</html>

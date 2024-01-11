@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery</title>
+    <!--<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script> --><!--cdn 방식-->
+    <script src="../js/jquery-1.12.4.min.js"></script>"
+    <script>
+        // $(document).ready(function(){
+        //     $("#doc").text("현재 페이지가 모두 로드되었습니다.");
+        // });
+
+        $(function(){
+            $("#doc").text("현재 페이지가 모두 로드되었습니다.");
+        });
+
+        $(window).load(function(){
+            $("#win").text("현재 모두 로드가 되었습니다.");
+        });
+    </script>
+</head>
+<body>
+    <h1>문서와 윈도우 창이 로드되는 시점 체크</h1>
+    <p>아래 표시되는 문장의 시점 차이를 살펴보세요.</p>
+    <iframe src="http://www.daum.net" width="100%" height="230px"></iframe>
+    <p id="doc">페이지가 로드되고 있습니다.</p>
+    <p id="win">페이지가 로드되고 있습니다.</p>
+</body>
+</html>

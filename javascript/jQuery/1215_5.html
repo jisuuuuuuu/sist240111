@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery</title>
+    <script src="../js/jquery-1.12.4.min.js"></script>
+    <script>
+        $(function(){
+            $("button").on("click", function(){
+                $("li:has(span)").text("<span>태그를 가지고 있는 <li>입니다.");
+            });
+            //체크박스에 체크되어 있는 태그를 모두 선택
+            $(":checked").next().text("checkbox에 체크되어 있습니다.");
+
+            //h3 태그의 텍스트를 읽어오기 getter
+            var newText = $("h3").html();
+            //id가 text에 newText값으로 setter
+            $("#text").html(newText);
+        });
+    </script>
+</head>
+<body>
+    <h2>태그들의 필터링</h2>
+    <ul>
+        <li>첫번째 순서</li>
+        <li><span>두번째</span>순서</li>
+        <li>세번째 순서</li>
+    </ul>
+    <button>필터링</button>
+
+    <br /><br />
+    <h2>form에 checkbox</h2>
+    <form>
+        <input type="checkbox" name="lec" value="html"><span>htmnl</span><br />
+        <input type="checkbox" name="lec" value="css"><span>css</span><br />
+        <input type="checkbox" name="lec" value="javascript"><span>javascript</span><br />
+        <input type="checkbox" name="lec" value="jQuery" checked><span>jQuery</span><br />
+    </form>
+    <button>필터링2</button>
+    <br />
+    <h3>.html()메서드 getter, setter</h3>
+    <p>버튼을 선택하시면 getter를 통해 얻은 값이 setter를 통해 나타납니다.</p>
+    <button>실행하기</button>
+    <p id="text"></p>
+</body>
+</html>

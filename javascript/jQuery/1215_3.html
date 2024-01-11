@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery</title>
+    <script src="../js/jquery-1.12.4.min.js"></script>
+    <script>
+        $(function(){
+            $("p").on("click", function(){
+                // $("span").css("fontSize", "28px");
+                // $("#jq").css("border", "2px solid orange");
+                $(".jq").css("backgroundColor", "gray");
+            });
+
+            $("button").on("click", function(){
+                $("img[alt='flower']").attr("src", "../img/computer1.png");
+            });
+        });
+    </script>
+</head>
+<body>
+    <h1>HTML css 적용</h1>
+    <p>오늘부터 <span>jQuery</span>를 시작합니다.<br />위 글자위를 클릭해 보세요.</p>
+    <p id="jq">1 오늘부터 jQuery를 시작합니다.<br />위 글자위를 클릭해 보세요.</p>
+
+    <p class="jq">2 오늘부터 jQuery를 시작합니다.<br />위 글자위를 클릭해 보세요.</p>
+
+    <p class="jq">3 오늘부터 jQuery를 시작합니다.<br />위 글자위를 클릭해 보세요.</p>
+
+    <br /><br />
+    <h1>이미지 속성 선택</h1>
+    <img src="../img/flower1.jpg" alt="flower">&nbsp;
+    <img src="../img/flower2.jpg" alt="flower2"><br />
+    <button>이미지를 변경합니다.</button>
+</body>
+</html>

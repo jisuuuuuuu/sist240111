@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>회원가입</title>
+    <script>
+        function validate()
+        {
+            //아이디 패턴
+            var idPattern = /^[a-zA-Z0-9-_]{6,20}$/;
+            //비밀번호 패턴
+            var pwdPattern = /^[a-zA-Z0-9~!@#$%^&*()_+|<>?:{}]{6,20}$/;
+
+            //아이디 입력체크
+            if(document.form1.userid.value.trim() == "")
+            {
+                alert("아이디를 입력하세요");
+                document.form1.userid.focus();
+                return;
+            }
+
+            //정규표현식 체크(아이디)
+            if(!idPattern.test(document.form1.userid.value))
+            {
+                alert("아이디는 6~20자로 영문 대소문자, 숫자, 특수기호(-,_)만 사용 가능합니다.");
+                document.form1.userid.value = "";
+                document.form1.userid.focus();
+                return;
+            }
+
+            //비밀번호 입력체크
+            if(document.form1.pwd1.value.trim() == "")
+            {
+                alert("비밀번호를 입력하세요.");
+                document.form1.pwd1.focus();
+                return;
+            }
+
+            //정규표현식 체크(비밀번호)
+            if(!pwdPattern.test(document.form1.pwd1.value))
+            {
+                alert("비밀번호는 6~20자 영문 대소문자, 숫자, 특수문자로 사용하세요.");
+                document.form1.pwd1.value = "";
+                document.form1.pwd1.focus();
+                return;
+            }
+
+            if(document.form1.pwd2.value.trim() == "")
+            {
+                alert("비밀번호 확인을 입력하세요.");
+                document.form1.pwd2.value = "";
+                document.form1.pwd2.focus();
+                return;
+            }
+
+            if(document.form1.pwd2.value != document.form1.pwd1.value)
+            {
+                alert("비밀번호를 다시한번 확인하세요.");
+                document.form1.pwd2.value = "";
+                document.form1.pwd2.focus();
+                return;
+            }
+
+
+        }
+    </script>
+</head>
+<body>
+    <h3>회원가입</h3>
+    <form name="form1" action="1214.html" method="get">
+        아이디(6~20 문자) : 
+        <input type="text" id="userid" name="userid" maxlength="20" /><br />
+        비밀번호 :
+        <input type="password" id="pwd1" name="pwd1" maxlength="20" /><br />
+        비밀번호 확인 :
+        <input type="password" id="pwd2" name="pwd2" maxlength="20" /><br />
+        이름 :
+        <input type="text" id="name" name="name" maxlength="20" /><br />
+        주소 : 
+        <input type="text" id="addr" name="addr" maxlength="20" /><br />
+        생일 :
+        <input type="date" id="birthday" name="birthday" /><br />
+        이메일 :
+        <input type="text" id="email" name="email" /><br />
+        휴대폰 :
+        <input type="text" id="phone" name="phone" /><br />
+        <input type="button" value="확 인" onClick="validate()"/>
+        &nbsp;
+        <input type="reset" value="다시입력" />
+        <input type="hidden" name="pwd" id="pwd" value="" />
+    </form>
+</body>
+</html>

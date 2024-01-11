@@ -1,0 +1,41 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<%!
+		int a;
+		String msgA;
+	%>
+	
+	<%
+		int b = 30;
+		String msgB = "jsp sample";
+	%>
+	<%=b + " : " + msgB %><p />
+	<%=application.getRealPath("/") %>
+	
+	<br />
+	
+	<h2>표현식 sample</h2>
+	<%!
+		String name[] = {"Java", "JSP", "html", "javascript"};
+	%>
+	<table border='1' width="200">
+	<%
+		for(int i = 0; i < name.length; i++)
+		{
+	%>
+			<tr><td><%=i %>
+			<td><%=name[i] %></td>
+			</tr>
+	<%
+		}
+	%>
+	</table>
+</body>
+</html>

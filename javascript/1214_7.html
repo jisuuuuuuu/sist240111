@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>자바스크립트-배열객체생성</title>
+</head>
+<body>
+    <script>
+        var city = new Array("Seoul", "Busan", "Incheon");
+
+        function printArr()
+        {
+            if(city instanceof Array)
+            {
+                document.write("배열 객체가 생성되었습니다.<br />");
+                var i;
+
+                for(i = 0; i < city.length; i++)
+                {
+                    document.write("배열 데이터 [" + i + "] = " + city[i] + "<br />");
+                }
+            }
+            else
+            {
+                document.write("배열 객체가 아닙니다.<br />");
+                document.write("데이터 : " + city + "<br />");
+            }
+        }
+
+        printArr();
+
+        document.write("<h3>city 변수 타입 : " + typeof city + "</h3>");
+        document.write("<h3>배열객체확인 결과 : " + Array.isArray(city) + "</h3>");
+    </script>
+</body>
+</html>

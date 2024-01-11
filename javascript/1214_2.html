@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script>
+        function add()
+        {
+            var header = document.createElement("h3");
+            var textNode = document.createTextNode('내 이름은 홍길동입니다.');
+            header.appendChild(textNode);
+            document.body.appendChild(header);
+        }
+
+        function add2()
+        {
+            var img = document.createElement('img');
+            img.scr = "./img/computer1.png";
+            img.width = 100;
+            img.height = 120;
+            document.body.appendChild(img);
+        }
+
+        function add3()
+        {
+            var img = document.createElement('img');
+            img.setAttribute('src', './img/computer2.jpg');
+            img.setAttribute('width', 100);
+            img.setAttribute('height', 120);
+            document.body.appendChild(img);
+        }
+    </script>
+</head>
+<body>
+    <h2>문서 객체 생성하기</h2>
+    <a href="#" onClick="add()">당신의 이름은 무엇입니까?</a>
+    <br />
+
+    <h2>문서 객체 속성값 설정</h2>
+    <a herf="#" onClick="add2()">[이미지 추가]</a>
+    <br />
+
+    <h2>setAttribute()메서드를 사용해 속성값 설정</h2>
+    <a herf="#" onClick="add3()">[이미지 추가2]</a>
+
+</body>
+</html>

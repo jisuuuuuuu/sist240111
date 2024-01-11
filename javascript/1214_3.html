@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>자바스크립트</title>
+    <script>
+        function changeColor(c)
+        {
+            document.getElementById("target").style.backgroundColor = c;
+        }
+
+        //현재 페이지가 전체 로그 되고 나서 실행
+        function onLoadDoc()
+        {
+            alert('문서가 모두 로드되었습니다.');
+            document.body.style.backgroundColor = 'pink';
+        }
+    </script>
+</head>
+<body id="target" onLoad="onLoadDoc();">
+    <form method="get" name="form1" action="1214.html">
+        <input type="radio" name="c1" value="v1" onClick="changeColor('lightblue');">파랑색
+        &nbsp;
+        <input type="radio" name="c1" value="v1" onClick="changeColor('lightgreen');">녹색
+
+    </form>
+</body>
+</html>

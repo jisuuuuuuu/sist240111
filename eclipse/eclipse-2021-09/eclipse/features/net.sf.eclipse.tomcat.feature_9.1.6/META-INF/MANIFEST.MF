@@ -1,0 +1,6 @@
+Manifest-Version: 1.0
+Created-By: 1.8.0_312 (Red Hat, Inc.)
+
+Name: feature.xml
+SHA-256-Digest: Jo2DcXNj4O9kjXF5fBEEs5H3WPaAW3yBz4sIchmik78=
+

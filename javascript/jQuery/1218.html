@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="../js/jquery-1.12.4.min.js"></script>
+    <script>
+        var val = 0;
+        $(function(){
+            $("#btn1").on("click", function(){
+                $("#list").append("<li id='id" + val++ +"'>새로 추가 됩니다.</li>");
+            });
+
+            $("#btn2").on("click", function(){
+                $("#list").prepend("<li>새로 앞으로 추가됩니다.</li>");
+            });
+        });
+    </script>
+</head>
+<body>
+    <h2>.append() 매서드 : 마지막에 추가</h2>
+    <ul id="list">
+        <li>첫번째 순서</li>
+        <li>두번째 순서</li>
+        <li>세번째 순서</li>
+    </ul>
+    <button id="btn1">마지막 추가</button>
+    <button id="btn2">처음에 추가</button>
+</body>
+</html>

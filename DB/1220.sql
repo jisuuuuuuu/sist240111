@@ -1,0 +1,191 @@
+alter user c##sisttest identified by 1111;      --test계정 비밀번호 변경
+revoke connect, dba from c##sisttest;           --test계정 권한 해제
+drop user c##sisttest cascade;                  --test계정 삭제
+
+--테이블 생성
+CREATE TABLE EMP(
+   EMPNO CHAR(4) CONSTRAINT PK_EMP PRIMARY KEY,   --직원번호
+   ENAME VARCHAR2(20),      --직원명
+   JOB VARCHAR2(10),        --직급
+   MGR CHAR(4),              --상사코드
+   HIREDATE DATE,           --입사일
+   SAL NUMBER(7, 2),        --급여
+   COMM NUMBER(7, 2),       --보너스
+   DEPTNO CHAR(2)           --부서코드
+);
+
+COMMENT ON TABLE EMP IS '직원';
+COMMENT ON COLUMN EMP.EMPNO IS '직원번호';
+COMMENT ON COLUMN EMP.ENAME IS '직원명';
+COMMENT ON COLUMN EMP.JOB IS '직급';
+COMMENT ON COLUMN EMP.MGR IS '상사코드(상사직원번호)';
+COMMENT ON COLUMN EMP.HIREDATE IS '입사일';
+COMMENT ON COLUMN EMP.SAL IS '급여';
+COMMENT ON COLUMN EMP.COMM IS '보너스';
+COMMENT ON COLUMN EMP.DEPTNO IS '부서코드';
+
+DESC EMP;           --EMP 테이블의 스키마 정보 조회
+SELECT * FROM DBA_TAB_COLUMNS WHERE TABLE_NAME = 'EMP';
+
+SELECT * FROM DBA_TAB_COMMENTS WHERE TABLE_NAME = 'EMP';
+
+CREATE TABLE DEPT(
+    DEPTNO CHAR(2) CONSTRAINT PK_DEPT PRIMARY KEY,
+    DNAME VARCHAR2(20),
+    LOC VARCHAR2(20)
+);
+
+COMMENT ON TABLE DEPT IS '부서';
+COMMENT ON COLUMN DEPT.DEPTNO IS '부서코드';
+COMMENT ON COLUMN DEPT.DNAME IS '부서명';
+COMMENT ON COLUMN DEPT.LOC IS '부서위치';
+
+ALTER TABLE EMP
+ADD CONSTRAINTS FK_DEPTNO FOREIGN KEY(DEPTNO)
+REFERENCES DEPT(DEPTNO);                --EMP테이블에 FK 설정
+
+--EMP테이블에 MGR(상사코드)에 대한 FK 지정
+ALTER TABLE EMP
+ADD CONSTRAINTS FK_MGR FOREIGN KEY(MGR)
+REFERENCES EMP(EMPNO);
+
+--테이블에 컬럼 추가
+ALTER TABLE EMP ADD(USER_NAME VARCHAR2(10));
+
+--테이블 타입 수정
+ALTER TABLE EMP MODIFY(USER_NAME VARCHAR2(20));
+
+--테이블 컬럼명 변경
+ALTER TABLE EMP RENAME COLUMN USER_NAME TO USER_F_NAME;
+
+--컬럼 삭제
+ALTER TABLE EMP DROP COLUMN USER_F_NAME;
+
+--테이블 삭제 DROP TABLE EMP;
+
+--데이터 사전 : ALL_, DBA_, USER_ (ALL_CONSTRAINTS, ALL_CONS_COLUMNS)
+SELECT * FROM ALL_CONSTRAINTS WHERE TABLE_NAME = 'EMP';
+SELECT * FROM ALL_CONS_COLUMNS WHERE TABLE_NAME = 'EMP';
+
+--부서테이블 deft 테이블에 INSERT문
+INSERT INTO DEPT (DEPTNO, DNAME, LOC) VALUES ('20', '인사팀', '서울 강서구');
+
+INSERT INTO DEPT VALUES ('30', '전산팀', '서울 마포구');
+
+INSERT INTO DEPT (DEPTNO, DNAME, LOC) VALUES ('40', '영업팀', '서울 종로구');
+INSERT INTO DEPT (DEPTNO, DNAME, LOC) VALUES ('50', '경리팀', '서울 관악구');
+COMMIT;
+
+--EMP테이블에 INSERT
+INSERT INTO EMP(EMPNO, ENAME, JOB, HIREDATE, SAL, COMM, DEPTNO) VALUES 
+('1001', '오중호', '사장', TO_DATE('2020-04-29', 'YYYY-MM-DD'), 9900, 1000, NULL);
+
+INSERT INTO EMP VALUES('1002', '임승준', '팀장', '1001', TO_DATE('2020-06-14', 'YYYY-MM-DD'), 8500, 900, '10');
+
+INSERT INTO EMP VALUES('1010', '이수연', '대리', '1002', TO_DATE('2021-05-14', 'YYYY-MM-DD'), 6800, 50, '10');
+
+INSERT INTO EMP VALUES('1003', '조민지', '팀장', '1001', TO_DATE('2021-03-07', 'YYYY-MM-DD'), 8500, 800, '20');
+
+INSERT INTO EMP VALUES('1011', '양희주', '대리', '1003', TO_DATE('2022-07-02', 'YYYY-MM-DD'), 6000, 100, '20');
+
+INSERT INTO EMP VALUES('1012', '최종현', '사원', '1003', TO_DATE('2022-12-22', 'YYYY-MM-DD'), 5800, 100, '20');
+
+INSERT INTO EMP VALUES('1004', '조민정', '팀장', '1001', TO_DATE('2021-12-10', 'YYYY-MM-DD'), 8300, 850, '30');
+
+INSERT INTO EMP VALUES('1013', '황해정', '대리', '1004', TO_DATE('2022-01-23', 'YYYY-MM-DD'), 7500, 700, '30');
+
+INSERT INTO EMP VALUES('1014', '박해근', '사원', '1004', TO_DATE('2022-01-30', 'YYYY-MM-DD'), 7400, 750, '30');
+
+INSERT INTO EMP VALUES('1005', '권재후', '팀장', '1001', TO_DATE('2020-02-10', 'YYYY-MM-DD'), 8500, 900, '40');
+
+INSERT INTO EMP VALUES('1015', '김인화', '대리', '1005', TO_DATE('2021-11-05', 'YYYY-MM-DD'), 7300, 650, '40');
+
+INSERT INTO EMP VALUES('1016', '장연준', '사원', '1005', TO_DATE('2022-06-20', 'YYYY-MM-DD'), 6800, 550, '40');
+
+INSERT INTO EMP VALUES('1006', '김지수', '팀장', '1001', TO_DATE('2020-01-22', 'YYYY-MM-DD'), 8800, 750, '50');
+
+INSERT INTO EMP VALUES('1017', '장세린', '대리', '1006', TO_DATE('2020-03-22', 'YYYY-MM-DD'), 6700, 550, '50');
+
+INSERT INTO EMP VALUES('1018', '김영현', '사원', '1006', TO_DATE('2021-08-20', 'YYYY-MM-DD'), 6000, 600, '50');
+COMMIT;
+ROLLBACK;
+
+--UPDATE
+--1. 모든 직원의 보너스에 10을 추가함.
+UPDATE EMP
+    SET COMM = COMM + 10;
+    
+UPDATE EMP
+    SET COMM = COMM + 10
+WHERE 1 = 1;
+
+--2. 직원번호가 1001인 직원의 보너스에 500을 추가하여 적용함.
+
+UPDATE EMP
+    SET COMM = COMM + 500
+WHERE EMPNO = '1001';
+
+--DELETE
+--TABLE 복사 (PK, FK는 복사되지 않음)
+CREATE TABLE EMP_20231220 AS 
+SELECT * FROM EMP;
+
+--1.전체 레코드 삭제
+DELETE FROM EMP_20231220;
+TRUNCATE TABLE EMP_20231220;
+
+--2. 상사코드가 1001인 직원을 삭제(팀장삭제)
+DELETE FROM EMP_20231220 WHERE MGR = 1001;
+
+COMMIT;
+ROLLBACK;
+DROP TABLE EMP_20231220;
+
+--SELECT 조회
+--EMP 테이블에 전체 레코드의 전체 컬럼정보 조회
+SELECT * FROM EMP;
+
+--EMP테이블의 직원 번호가 1001인 직원에 대한 직원번호, 직원명, 직급을 조회함.
+SELECT EMPNO, ENAME, JOB
+    FROM EMP
+WHERE EMPNO = '1001';
+
+--직원 번호가 1010번 이상인 직원 조회
+SELECT * 
+  FROM EMP
+ WHERE EMPNO >= '1010';
+ 
+--직원 번호가 1010번 이상이면서 보너스가 700이상인 직원 조회
+SELECT *
+  FROM EMP
+ WHERE EMPNO >= '1010'
+   AND COMM >= 700;
+   
+--직원 번호가 1010번 이상이거나 보너스가 700이상인 직원 조회
+SELECT *
+  FROM EMP
+ WHERE EMPNO >= '1010'
+    OR COMM >= 700;
+    
+--직원 번호가 1010번 이상이면서 보너스가 500만원 이상인 직원정보중 직원번호, 직원명, 직급을 조회함
+SELECT EMPNO, ENAME, JOB
+  FROM EMP
+ WHERE EMPNO >= '1010'
+   AND COMM >= 500;
+   
+--조회항목이 직원번호, 직원명, 직급, 급여 + 보너스, 부서코드
+--상사코드가 '1001'에 대한 직원정보 조회
+SELECT EMPNO, ENAME, JOB, SAL + COMM, DEPTNO
+  FROM EMP
+ WHERE MGR = '1001';
+ 
+ --조회항목이 직원번호, 직원명, 직급, 총급여, 부서코드
+ --직원 번호가 1010이상인 직원이면서 총급여가 8000 이상인 직원정보 조회
+SELECT EMPNO AS 직원번호, ENAME AS 직원명, JOB 직급, SAL + COMM AS 총급여, DEPTNO 부서코드
+  FROM EMP
+ WHERE EMPNO >= '1010'
+   AND (SAL + COMM) >= 8000;
+   
+SELECT NVL(DEPTNO, '00') AS 부서코드
+  FROM EMP
+ WHERE EMPNO = '1001';

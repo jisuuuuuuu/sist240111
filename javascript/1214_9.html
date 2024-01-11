@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>자바스크립트</title>
+</head>
+<body>
+    <!--1)페이지 로딩시 '배열값1 2 3 4 .... 100' 출력하고 다음줄에
+          배열 크기 : 100
+          돌아가기 '<a herf='1214_9.html'>돌아가기</a>'
+        2)'배열 데이터 초기화' 버튼 선택
+          전체 0으로 예)0 0 0 ..... 0으로 출력하고 다음줄에
+          배열 크기 : 100
+          돌아가기 '<a herf='1214_9.html'>돌아가기</a>'
+        3)'배열 데이터 삭제' 버튼 선택
+          전체가 없어서 아무것도 출력이 안되며
+          배열 크기 : 0
+          돌아가기 '<a herf='1214_9.html'>돌아가기</a>'-->
+    <script>
+        var arrdata = [];
+
+        function insertArr()
+        {//데이터 저장(배열 100)
+            var i;
+
+            for(i = 0; i < 100; i++)
+            {
+                arrdata[i] = i + 1;
+            }
+
+            selectArr();
+        }
+
+        function selectArr()
+        {
+            var i;
+
+            for(i = 0; i < arrdata.length; i++)
+            {
+                document.write(arrdata[i] + " ");
+            }
+
+            document.write("<p>배열 크기 : " + arrdata.length + "</p>");
+            document.write("<a href='1214_9.html'>돌아가기</a><br />");
+        }
+
+        function delDataArr()
+        {//배열데이터를 0으로 초기화
+            var i;
+
+            for(i = 0; i < arrdata.length; i++)
+            {
+                arrdata[i] = 0;
+            }
+
+            selectArr();
+        }
+
+        function allDataArr()
+        {//배열크기 초기화
+            arrdata.length = 0;
+            selectArr();
+        }
+
+
+        insertArr();
+    </script>
+
+    <input type="button" value="배열 데이터 초기화" onClick="delDataArr()" />
+    <br />
+    <input type="button" value="배열 데이터 삭제" onClick="allDataArr()" />
+</body>
+</html>

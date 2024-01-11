@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery</title>
+    <script src="../js/jquery-1.12.4.min.js"></script>
+    <script>
+        $(function(){
+            $("#btn1").on({
+                mouseenter:function(){
+                    $("#text").append("마우스가 버튼 위로 왔습니다.<br />");
+                },
+                click:function(){
+                    $("#text").append("마우스가 버튼을 클릭했습니다.<br />");
+                },
+                mouseleave:function(){
+                    $("#text").append("마우스가 버튼을 떠났습니다<br />");
+                }
+            });
+
+            $("#btn2").click(function(){
+                $("#clickText").css("color", "red");
+                $("#dbclickText").css("color", "black");
+            });
+
+            $("#btn2").dblclick(function(){
+                $("#clickText").css("color", "black");
+                $("#dbclickText").css("color", "red");
+            });
+
+            $("#focus").on("focusin", function(event){
+                $(this).css("backgroundColor", "yellow");
+            });
+
+            $("#focus").on("focusout", function(event){
+                $(this).css("backgroundColor", "white");
+            });
+
+            $("#focus2").on("keypress",function(event){
+                $("#str").html(event.type + ":" + event.which);
+            });
+
+            $("#btn3").on("click", function(){
+                $("#text2").show();
+            });
+
+            $("#btn4").on("click", function(){
+                $("#text2").hide();
+            });
+
+            $("#btn5").on("click", function(){
+                $("#text2").toggle("slow");
+            });
+        });
+    </script>
+</head>
+<body>
+    <h2>마우스 이벤트</h2>
+    <button id="btn1">마우스 버튼 위로 포커스 이동해보세요.</button>
+    <p id="text"></p>
+    <br /><br />
+    <button id="btn2">dbclick</button>
+    <p>버튼을 <span id="clickText">클릭</span>하거나, <span id="dbclickText">더블클릭</span>해보세요.
+    </p>
+    <br />
+    <h2>.focusin() focusout() 메서드</h2>
+    <input type="text" id="focus">
+    <br />
+    <h2>.keypress() 메서드</h2>
+    <input type="text" id="focus2">
+    <p id="str"></p>
+    <br />
+    <h2>.show() .hide() 메서드</h2>
+    <p>아래 테스트가 show와 hide를 반복합니다.</p>
+    <p id="text2">이부분이 숨기기도 하고 나타나기도 합니다.</p>
+    <button id="btn3">표시하기</button>
+    <button id="btn4">숨기기</button>
+    <button id="btn5">토글기능</button>
+</body>
+</html>

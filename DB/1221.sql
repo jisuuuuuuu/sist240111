@@ -1,0 +1,352 @@
+INSERT INTO EMP VALUES
+('1019', '정현진', '사원', '1002', TO_DATE('2020-04-29', 'YYYY-MM-DD'),
+ 6900, 500, '10');
+
+INSERT INTO EMP VALUES
+('1020', '송민기', '사원', '1002', TO_DATE('2020-06-14', 'YYYY-MM-DD'),
+ 8500, 900, '10');
+ 
+INSERT INTO EMP VALUES
+('1021','윤하나','사원','1002',TO_DATE('2021-05-14', 'YYYY-MM-DD'),
+ 6800, 50, '10');
+
+INSERT INTO EMP VALUES
+('1022','배찬혁','사원','1002',TO_DATE('2022-12-22', 'YYYY-MM-DD'),
+ 4500, 100, '10');
+
+INSERT INTO EMP VALUES
+('1023','김지현','사원','1002', SYSDATE, 4500, 50, '10');
+
+--------------------------------------------------------
+
+INSERT INTO EMP VALUES
+('1024','류경민','사원','1003',TO_DATE('2021-03-07', 'YYYY-MM-DD'),
+ 8500, 800, '20');
+ 
+INSERT INTO EMP VALUES
+('1025','김지현','사원','1003',TO_DATE('2022-07-02', 'YYYY-MM-DD'),
+ 6000, 100, '20');
+ 
+INSERT INTO EMP VALUES
+('1026','김시형','사원','1003',TO_DATE('2021-12-10', 'YYYY-MM-DD'),
+ 8300, 850, '20');
+ 
+INSERT INTO EMP VALUES
+('1027','서동호','사원','1003',TO_DATE('2022-01-23', 'YYYY-MM-DD'),
+ 7500, 700, '20'); 
+ 
+ --------------------------------------------------------
+ 
+ 
+INSERT INTO EMP VALUES
+('1028','이한솔','사원','1004',TO_DATE('2022-01-30', 'YYYY-MM-DD'),
+ 7800, 650, '30'); 
+ 
+INSERT INTO EMP VALUES
+('1029','원종연','사원','1004',TO_DATE('2020-02-10', 'YYYY-MM-DD'),
+ 8500, 900, '30');
+
+INSERT INTO EMP VALUES
+('1030','박영재','사원','1004',TO_DATE('2021-11-05', 'YYYY-MM-DD'),
+ 7000, 550, '30');
+
+INSERT INTO EMP VALUES
+('1031','허인호','사원','1004',TO_DATE('2022-06-20', 'YYYY-MM-DD'),
+ 6800, 550, '30');
+ 
+ 
+ --------------------------------------------------------
+ 
+ 
+ 
+INSERT INTO EMP VALUES
+('1032','윤예서','사원','1005',TO_DATE('2020-01-22', 'YYYY-MM-DD'),
+ 8800, 750, '40');
+ 
+INSERT INTO EMP VALUES
+('1033','이지완','사원','1005',TO_DATE('2020-03-22', 'YYYY-MM-DD'),
+ 6700, 550, '40');
+ 
+INSERT INTO EMP VALUES
+('1034','박수현','사원','1005',TO_DATE('2021-08-20', 'YYYY-MM-DD'),
+ 6000, 600, '40');
+ 
+  --------------------------------------------------------
+ 
+ 
+INSERT INTO EMP VALUES
+('1035','이용효','사원','1006',TO_DATE('2020-03-22', 'YYYY-MM-DD'),
+ 8900, 800, '50'); 
+ 
+ 
+INSERT INTO EMP VALUES
+('1036','임려종','사원','1006',TO_DATE('2020-06-21', 'YYYY-MM-DD'),
+ 6900, 700, '50'); 
+ 
+INSERT INTO EMP VALUES
+('1037','권미리','사원','1006',SYSDATE, 6100, 580, '50'); 
+
+commit;
+
+--급여테이블 생성
+CREATE TABLE SALARY(
+    SALMONTH CHAR(6),
+    EMPNO CHAR(4),
+    SAL NUMBER(7, 2),
+    COMM NUMBER(7, 2),
+    CONSTRAINT PK_SALARY PRIMARY KEY(SALMONTH, EMPNO)
+);
+
+
+--테이블 생성 후 외래키(FK)설정
+ALTER TABLE SALARY
+ADD CONSTRAINT FK_SALMONTH FOREIGN KEY (EMPNO)
+REFERENCES EMP(EMPNO);
+
+--외래키 이름이 잘못되어 삭제할 경우
+ALTER TABLE SALARY DROP CONSTRAINT FK_SAKMONEY;
+
+--EMP테이블에 SAL, COMM을 SALARY 테이블로 생성
+INSERT INTO SALARY 
+SELECT '202312', EMPNO, SAL, COMM
+  FROM EMP;
+  
+INSERT INTO SALARY
+SELECT '202311', EMPNO, SAL-100, COMM-50
+  FROM SALARY
+ WHERE SALMONTH = '202312';
+ 
+COMMIT;
+
+--EMP테이블에 SAL, COMM 컬럼 삭제
+ALTER TABLE EMP DROP COLUMN SAL;
+ALTER TABLE EMP DROP COLUMN COMM;
+
+SELECT * FROM ALL_CONSTRAINTS WHERE TABLE_NAME = 'SALARY';      --USER_CONSTRAINTS
+SELECT * FROM USER_CONS_COLUMNS WHERE TABLE_NAME = 'SALARY';
+
+SELECT *
+  FROM SALARY
+ WHERE SALMONTH= TO_CHAR(SYSDATE, 'YYYYMM')
+   AND EMPNO = '1001';
+   
+--NULL이 아닌 경우만 조회
+--NULL : IS NULL, NULL이 아닌걸 체크 : IS NOT NULL
+--직원명과 직급을 조회하는데 출력 포멧 : [직원명]-[직급] 타이틀은 '직원명과 직급'
+--상사코드가 존재하는 경우만 조회
+SELECT '[' || ENAME || ']-[' || JOB || ']' AS "직원명과 직급"
+  FROM EMP
+ WHERE MGR IS NOT NULL;
+ 
+--UPPER, LOWER, INITCAP
+SELECT UPPER('manager'), LOWER('MaNager'), INITCAP('manager')
+  FROM DUAL;
+  
+--급여 테이블에 급여날짜가 '202312'을 기준으로 보너스를 조회시 3자리마다 ,로 구분하여 조회
+SELECT COMM
+      ,TO_CHAR(NVL(COMM, 0), '9,999,990')
+      ,TO_CHAR(NVL(COMM, 0) + 100, '9,999,990')
+      ,NVL(COMM, 0) -100
+      ,TO_CHAR(NVL(COMM, 0) *3, '9,999,990')
+      ,NVL(COMM, 0) / 2
+  FROM SALARY
+ WHERE SALMONTH = '202312';
+ 
+--BETWEEN
+--이번달 급여중 보너스가 300에서 800 사이 받는 직원 정보를 조회
+SELECT *
+  FROM SALARY
+ WHERE SALMONTH = TO_CHAR(SYSDATE, 'YYYYMM')
+ --  AND COMM BETWEEN 700 AND 800;
+   AND (COMM >= 700 AND COMM <= 800);           --BETWEEN문장 사용과 동일한 결과
+
+--IN : 직원번호가 1001, 1002, 1003, 1005, 1006 조회
+--EMP 테이블 기준으로 전체 컬럼 조회
+SELECT *
+  FROM EMP
+ WHERE EMPNO IN ('1001', '1002', '1003', '1004', '1005', '1006');
+ 
+--LIKE
+--직원정보중 이름에 '지'가 포함되어 있는 직원정보 조회
+SELECT *
+  FROM EMP
+ WHERE ENAME LIKE '%지%';
+ 
+UPDATE EMP
+   SET ENAME = '김지연'
+ WHERE EMPNO = '1025';
+ 
+COMMIT;
+
+--DUAL 테이블
+SELECT SYSDATE            --날짜포멧은 메뉴 도구에서 환경설정 데이터베이스 -> NLS에서 확인
+      ,TO_CHAR(SYSDATE, 'YYYY.MM.DD')          
+  FROM DUAL;
+  
+--ROUND : 반올림, TRUNC : 잘라냄, MOD : 나눈 나머지
+SELECT ROUND(10.157, 1)
+      ,TRUNC(10.157, 1)
+      ,MOD(10, 3)
+  FROM DUAL;
+  
+--문자 처리 함수 : LENGTH, CONCAT, SUBSTR, REPLACE
+SELECT LENGTH('ABC')
+      ,CONCAT('ABC', 'DEF')
+      ,SUBSTR('ABCDEF', 3, 2)
+      ,REPLACE('DD', 'D', 'ABCDE')
+  FROM DUAL;
+  
+--날짜 함수
+SELECT SYSDATE
+      ,SYSTIMESTAMP
+      ,ADD_MONTHS(SYSDATE, 1)
+      ,MONTHS_BETWEEN(ADD_MONTHS(SYSDATE, 1), SYSDATE)
+      ,NEXT_DAY(SYSDATE, '토요일')
+      ,LAST_DAY(SYSDATE)
+      ,ROUND(SYSDATE, 'MONTH')
+      ,TRUNC(SYSDATE, 'MONTH')
+  FROM DUAL;
+  
+--날짜 포멧
+SELECT TO_CHAR(SYSDATE, 'YYYYMMDD')
+      ,TO_CHAR(SYSDATE, 'YYYY/MM/DD')
+      ,TO_CHAR(SYSDATE, 'YYYY-MM-DD')
+      ,TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS')
+      ,TO_CHAR(SYSDATE, 'MM/DD')
+      ,TO_CHAR(SYSDATE, 'FMMM/DD')
+      ,TO_CHAR(TO_DATE('20230506', 'YYYYMMDD'), 'FMMM/DD')
+  FROM DUAL;
+  
+ --구분자로 날짜 형식
+SELECT TO_CHAR(SYSDATE, 'YYYY"년 "MM"월 "DD"일"')
+      ,TO_CHAR(SYSDATE, 'HH24"시 "MI"분"SS"초"')
+  FROM DUAL;
+  
+--시간에 오전, 오후 표시
+SELECT TO_CHAR(SYSDATE, 'AM')
+      ,TO_CHAR(SYSDATE, 'AM HH:MI:SS')
+      ,TO_CHAR(SYSDATE, 'YYYY-MM-DD AMHH:MI:DD')
+  FROM DUAL;
+  
+--변환함수
+SELECT TO_CHAR(SYSDATE, 'YYY.MM.DD')
+      ,TO_NUMBER('12345')
+      ,TO_DATE('20231030', 'YYYYMMDD')
+  FROM DUAL;
+  
+--집계함수 (COUNT, MAX, MIN, AVG, SUM) : COUNT를 제외한 집계함수는 반드시 컬럼명이 들어가야함.
+--급여가 5000만원이상 7000만원 이하의 전체 직원 수를 조회
+SELECT COUNT(SALMONTH)      --SELECT COUNT(*)
+  FROM SALARY
+ WHERE SALMONTH = TO_CHAR(SYSDATE, 'YYYYMM')
+   AND SAL >= 5000
+   AND SAL <= 7000;
+   
+--현재 직원중 직원번호가 가장 큰 직원번호 조회
+SELECT MAX (EMPNO)
+  FROM EMP;
+  
+--이번달 급여가 5000에서 7000사이의 직원중 급여액이 가장 높은 금액을 조회
+SELECT MAX (SAL)
+  FROM SALARY
+ WHERE SALMONTH = TO_CHAR(SYSDATE, 'YYYYMM')
+   AND SAL BETWEEN 5000 AND 7000;
+   
+--현재 직원중 직원번호가 가장 작은 직원번호 조회
+SELECT MIN (EMPNO)
+  FROM EMP;
+  
+--이번달 급여가 5000에서 7000사이의 직원중 급여액이 가장 낮은 금액을 조회
+SELECT MIN (SAL)
+  FROM SALARY
+ WHERE SALMONTH = TO_CHAR(SYSDATE, 'YYYYMM')
+   AND SAL >= 5000
+   AND SAL <= 7000;
+   
+--이번달 급여의 평균금액과 전체 급여 합계를 조회
+SELECT AVG (SAL)
+  FROM SALARY
+ WHERE SALMONTH = TO_CHAR(SYSDATE, 'YYYYMM');
+ 
+SELECT SUM (SAL)
+  FROM SALARY
+ WHERE SALMONTH = TO_CHAR(SYSDATE, 'YYYYMM');
+ 
+--직원 번호가 1002 - 1006까지 몇명인지와 급여 합계를 구하시오.(현재월)
+--출력예) 4명 328000으로 출력하게 쿼리 작성.(별칭 : 팀장인원, 팀장 총금액)
+SELECT COUNT(EMPNO) || '명' AS 팀장인원, SUM(SAL) || '원' AS "팀장 총금액"
+  FROM SALARY
+ WHERE SALMONTH = TO_CHAR(SYSDATE, 'YYYYMM')
+   AND EMPNO BETWEEN 1002 AND 1006;
+   
+SELECT COUNT(EMPNO), MAX(SAL), MIN(SAL), AVG(SAL), SUM(SAL)
+  FROM SALARY
+WHERE SALMONTH = '202312'
+  AND EMPNO BETWEEN 1002 AND 1006;
+  
+--그룹핑(집계함수) GROUP BY
+--삼사별 팀원수를 조회
+SELECT MGR, COUNT(MGR)
+  FROM EMP
+ WHERE MGR IS NOT NULL
+ GROUP BY MGR;
+ 
+--문제)직원에 대한 부서별 인원수를 조회하는 쿼리 작성
+SELECT DEPTNO 부서명, COUNT(DEPTNO) 인원수
+  FROM EMP
+ WHERE DEPTNO IS NOT NULL
+ GROUP BY DEPTNO;
+ 
+--바로 위 결과에서 부서별 인원이 7명이상인 부서를 조회
+SELECT DEPTNO, COUNT(EMPNO)
+  FROM EMP
+ WHERE DEPTNO IS NOT NULL
+ GROUP BY DEPTNO
+ HAVING COUNT(EMPNO) >= 7;
+ 
+--문제)직원테이블에서 관리자별 관리하는 사원의 수를 조회하는 쿼리작성
+--단, 관리자가 없는 직원은 제외하고 관리사원수가 5명이상인 경우만 조회되도록 함
+SELECT MGR, COUNT(EMPNO)
+  FROM EMP
+ WHERE MGR IS NOT NULL
+ GROUP BY MGR
+HAVING COUNT(EMPNO) >= 5;
+ 
+--DISTINCT 중복제거
+SELECT DISTINCT JOB
+  FROM EMP;
+  
+SELECT JOB, COUNT(JOB)
+  FROM EMP
+ GROUP BY JOB;
+ 
+SELECT DISTINCT JOB, DEPTNO
+  FROM EMP;
+  
+--2023년 11월과 12월 두달간에 직원별 평균 급여액 조회
+--단, 급여 평균이 7500 이상인 직원과 평균조회
+SELECT EMPNO, AVG(SAL)
+  FROM SALARY
+ WHERE SALMONTH IN('202311', '202312')
+ GROUP BY EMPNO
+HAVING AVG(SAL) >= 7500;
+
+--ORDER BY
+SELECT *
+  FROM EMP
+ ORDER BY DEPTNO; -- DESC;
+ 
+SELECT DISTINCT DEPTNO, MGR
+  FROM EMP
+ ORDER BY DEPTNO ASC;
+ 
+SELECT *
+  FROM EMP
+ ORDER BY DEPTNO ASC, MGR DESC;
+ 
+--급여 테이블에서 급여액이 높고 보너스가 낮은 순으로 조회하는 쿼리 작성
+--단, 금액으로만 처리하며, 중복은 제거함(2023년 12월 기준)
+SELECT DISTINCT SAL, COMM
+  FROM SALARY
+ WHERE SALMONTH = '202312'
+ ORDER BY SAL DESC, COMM ASC;

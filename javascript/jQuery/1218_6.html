@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery</title>
+    <script src="../js/jquery-1.12.4.min.js"></script>
+    <style>
+        .container * {
+            display:block;
+            border:1px solid lightgray;
+            padding:5px;
+            margin:15px;
+        }
+    </style>
+    <script>
+        $(function(){
+            $("#parents").on("click", function(){
+                $("#orgin").parents("div").css({"border":"2px solid red"});
+            });
+
+            $("#closest").on("click", function(){
+                $("#orgin").closest("div").css({"border":"2px solid green"});
+            });
+        });
+    </script>
+
+</head>
+<body>
+    <h1>.parents() 메서드</h1>
+    <div class="container">
+        <div>div요소
+            <div>div요소2
+                <ul>ul요소
+                    <li>li요소</li>
+                    <li>li요소
+                        <div id="orgin">div 요소(기준)
+                            <span>span요소</span>
+                        </div>
+                    </li>
+                    <li>li요소</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <button id="parents">parents() 메서드</button>
+    <button id="closest">closest() 메서드</button>
+</body>
+</html>

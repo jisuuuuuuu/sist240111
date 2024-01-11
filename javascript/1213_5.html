@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>자바스크립트</title>
+    <script>
+        function add()
+        {
+            alert("1");
+            var sum = 1;
+            return sum;
+        }
+
+        function add(a)
+        {
+            alert("2");
+            var sum = a + 1;
+            return sum;
+        }
+
+        function add(a, b)
+        {
+            alert("3");
+            var sum = a + b;
+            return sum;
+        }
+
+        // function add(a, b, c)
+        // {
+        //     alert("4");
+        //     var sum;
+
+        //     sum = a + b + c;
+        //     return sum;
+        // }
+        //바로 위 함수에서 매개변수에 따라 NaN 결과가 나오지 않게 처리
+        function add(a, b, c)
+        {
+            alert("4");
+            var sum;
+ 
+            if(a === undefined && b === undefined && c === undefined)
+            {
+                sum = 0;
+            }
+            else if(b === undefined && c === undefined)
+            {
+                sum = a;
+            }
+            else if(c === undefined)
+            {
+                sum = a + b;
+            }
+            else
+            {
+                sum = a + b + c;
+            }
+            return sum;
+        }
+        /*
+        같은 함수명의 여러개 함수가 존재 할 경우 위에서 아래로 실행하므로 마지막에 있는 함수를 호출한다.
+        */
+    </script>
+</head>
+<body>
+    <h2>인자의 개수가 적을때 처리방법</h2>
+    <script>
+        var r = add();
+        var r1 = add(2);
+        var r2 = add(2, 3);
+        var r3 = add(4, 5, 6);
+
+        document.write("함수 인수 부족 r : " + r + "<br />");
+        document.write("함수 인수 부족 r1 : " + r1 + "<br />");
+        document.write("함수 인수 부족 r2 : " + r2 + "<br />");
+        document.write("정상적인 함수 호출 r3 : " + r3 + "<br />");
+    </script>
+</body>
+</html>
